@@ -1,20 +1,29 @@
+  // Function to clear input fields
+  function clearInputFields() {
+    document.getElementById('arrayInput').value = '';
+    document.getElementById('kValue').value = '';
+  }
+
+  // Add event listener for window.onload event to clear input fields
+  window.onload = clearInputFields;
+
 function findKthLargest() {
   const array = document
-    .getElementById("arrayInput")
-    .value.split(",")
-    .map(Number);
+      .getElementById("arrayInput")
+      .value.split(",")
+      .map(Number);
   const k = parseInt(document.getElementById("kValue").value);
 
   const kthLargest = findKthLargestElement(array, k);
 
   document.getElementById(
-    "output"
+      "output"
   ).innerText = `Kth Largest Element: ${kthLargest}`;
 }
 
 function findKthLargestElement(array, k) {
   if (k > array.length || k <= 0) {
-    return "Invalid K value";
+      return "Invalid K value";
   }
 
   // Sorting the array in descending order
@@ -26,21 +35,21 @@ function findKthLargestElement(array, k) {
 
 function findKthSmallest() {
   const array = document
-    .getElementById("arrayInput")
-    .value.split(",")
-    .map(Number);
+      .getElementById("arrayInput")
+      .value.split(",")
+      .map(Number);
   const k = parseInt(document.getElementById("kValue").value);
 
   const kthSmallest = findKthSmallestElement(array, k);
 
   document.getElementById(
-    "output"
+      "output"
   ).innerText = `Kth Smallest Element: ${kthSmallest}`;
 }
 
 function findKthSmallestElement(array, k) {
   if (k > array.length || k <= 0) {
-    return "Invalid K value";
+      return "Invalid K value";
   }
 
   // Sorting the array in ascending order
@@ -50,10 +59,20 @@ function findKthSmallestElement(array, k) {
   return array[k - 1];
 }
 
-// Add this script to clear the input field on page load
-document.addEventListener('DOMContentLoaded', function() {
-  var arrayInput = document.getElementById('arrayInput');
-  arrayInput.value = ''; 
-  var kValue = document.getElementById('kValue');
-  kValue.value = ''; 
+// Add event listeners for "keypress" event to input fields
+document.getElementById("arrayInput").addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+      findKthLargest();
+  }
 });
+
+document.getElementById("kValue").addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+      findKthLargest();
+  }
+});
+
+// Add event listeners for button clicks
+document.getElementById("findKthLargestButton").addEventListener("click", findKthLargest);
+document.getElementById("findKthSmallestButton").addEventListener("click", findKthSmallest);
+
